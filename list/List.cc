@@ -42,13 +42,10 @@ List::List(List && tmp) noexcept
 List::List(std::initializer_list<int> lst)
     : List{}
 {
-    cout << "dp" <<endl;
     for ( auto val : lst )
     {
         push_back(val);
     }
-    cout << "dp" <<endl;
-
 }
 
 void List::push_front(int value)
@@ -65,6 +62,7 @@ void List::push_back(int value)
     tail->prev = old_last->next.get();
     ++sz;
 }
+
 
 bool List::empty() const noexcept
 {
