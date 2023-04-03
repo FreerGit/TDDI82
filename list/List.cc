@@ -128,3 +128,68 @@ List & List::operator=(List && rhs)& noexcept
     swap(rhs);
     return *this;
 }
+
+List::List_Iterator::List_Iterator() : ptr{nullptr} {}
+
+List::List_Iterator::List_Iterator(Node* ptr) 
+    : ptr{ptr} {}
+
+ostream& operator<<(ostream &os, List const &list) {
+    for(int i = 0; i < list.size(); i++) {
+        os << list.at(i);
+        if (i+1 != list.size()) {
+            os << " ";
+        }
+    }
+    return os;
+}
+
+
+List::List_Iterator List::begin() {
+    return List_Iterator(this->head->next.get());
+}
+
+List::List_Iterator List::end() {
+    return List_Iterator(this->tail);
+}
+
+
+List::List_Iterator& List::List_Iterator::operator++() {
+    ptr = ptr->next.get();
+    return *this;
+}
+
+List::List_Iterator List::List_Iterator::operator++(int) {
+    List_Iterator temp = *this;
+    operator++();
+    return temp;
+}
+
+List::List_Iterator& List::List_Iterator::operator--() {
+    ptr = ptr->prev;
+    return *this;
+}
+
+List::List_Iterator List::List_Iterator::operator--(int) {
+    List_Iterator temp = *this;
+    operator--();
+    return temp;
+}
+
+List::List_Iterator::reference List::List_Iterator::operator*() const {
+    return this->ptr->value;
+}
+
+List::List_Iterator::pointer List::List_Iterator::operator->() const {
+    return &this->ptr->value;
+}
+
+bool List::List_Iterator::operator==(List::List_Iterator const& rhs) const {
+    return this->ptr == rhs.ptr;
+}
+
+bool List::List_Iterator::operator!=(List::List_Iterator const& rhs) const {
+    return !(this->ptr == rhs.ptr);
+}
+
+

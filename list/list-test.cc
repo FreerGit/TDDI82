@@ -2,6 +2,8 @@
 #include "List.h"
 
 #include "catch.hpp"
+#include <sstream>
+#include <iterator>
 
 TEST_CASE( "Create list" )
 {
@@ -49,3 +51,28 @@ TEST_CASE( "Create list" )
     
 }
 
+
+TEST_CASE( "Iterator" ) {
+    SECTION(" increment ") {
+        List lst{2,3,1,5};
+        std::stringstream ss;
+        for ( auto it = lst.begin(); it != lst.end(); ++it )
+        {
+          ss << *it << ' ';
+        }
+
+        CHECK(ss.str() == "2 3 1 5 ");
+    }
+    SECTION(" decrement ") {
+        List lst{2,3,1,5};
+        std::stringstream ss;
+        auto rb { std::make_reverse_iterator(lst.end()) };
+        auto re { std::make_reverse_iterator(lst.begin()) };
+        for ( auto it = rb; it != re; ++it )
+        {
+          ss << (*it) << ' ';
+        }
+
+        CHECK(ss.str() == "5 1 3 2 ");
+    }
+}
