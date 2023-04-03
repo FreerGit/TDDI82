@@ -5,6 +5,9 @@
 #include <memory>
 #include <iterator>
 
+namespace List_NS {
+
+
 template<typename T>
 class List
 {
@@ -82,6 +85,7 @@ private:
 template<typename T>
 std::ostream& operator<<(std::ostream &os, List<T> const &list);
 
+}
 #include "List.tcc"
 
 #endif //LIST_H
