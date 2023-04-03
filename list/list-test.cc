@@ -8,19 +8,19 @@
 TEST_CASE( "Create list" )
 {
     {
-    List lst{1,4,2,6,8,9};
+    List<int> lst{1,4,2,6,8,9};
 
     CHECK(lst.at(0) == 1);
     CHECK(lst.at(2) == 2);
     CHECK(lst.size() == 6);
-    List l2;
+    List<int> l2;
     l2 = lst;
     CHECK(l2.size() == lst.size());
     CHECK(l2.front() == lst.front());
     CHECK(l2.back() == lst.back());
     }
     {
-        List lst{-1,-5,10,5,5,5,5};
+        List<int> lst{-1,-5,10,5,5,5,5};
         CHECK(lst.at(0) == -1);
         CHECK(lst.at(1) == -5);
         CHECK(lst.size() == 7);
@@ -30,8 +30,8 @@ TEST_CASE( "Create list" )
         CHECK(lst.at(8) == -100);
     }
     {
-        List lst{1,2,3};
-        List lst2;
+        List<int> lst{1,2,3};
+        List<int> lst2;
         lst2 = std::move(lst);
 
         CHECK(lst.size() == 0);
@@ -39,13 +39,13 @@ TEST_CASE( "Create list" )
         CHECK(lst.empty());
     }
     {
-        List lst{1,2,3};
+        List<int> lst{1,2,3};
         
         CHECK(lst.front() == 1);
         CHECK(lst.back() == 3);
     }
     {
-        const List lst{1,2,3};
+        const List<int> lst{1,2,3};
         CHECK(lst.at(0) == 1);
     }
     
@@ -54,7 +54,7 @@ TEST_CASE( "Create list" )
 
 TEST_CASE( "Iterator" ) {
     SECTION(" increment ") {
-        List lst{2,3,1,5};
+        List<int> lst{2,3,1,5};
         std::stringstream ss;
         for ( auto it = lst.begin(); it != lst.end(); ++it )
         {
@@ -64,7 +64,7 @@ TEST_CASE( "Iterator" ) {
         CHECK(ss.str() == "2 3 1 5 ");
     }
     SECTION(" decrement ") {
-        List lst{2,3,1,5};
+        List<int> lst{2,3,1,5};
         std::stringstream ss;
         auto rb { std::make_reverse_iterator(lst.end()) };
         auto re { std::make_reverse_iterator(lst.begin()) };
@@ -74,5 +74,15 @@ TEST_CASE( "Iterator" ) {
         }
 
         CHECK(ss.str() == "5 1 3 2 ");
+    }
+    SECTION(" complex datatype ") {
+        List<std::string> lst{"hej","svej","dej"};
+        std::stringstream ss;
+        for ( auto it = lst.begin(); it != lst.end(); ++it )
+        {
+          ss << *it << ' ';
+        }
+
+        CHECK(ss.str() == "hej svej dej ");
     }
 }
