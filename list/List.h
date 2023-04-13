@@ -6,8 +6,6 @@
 #include <iterator>
 
 namespace List_NS {
-
-
 template<typename T>
 class List
 {

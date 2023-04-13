@@ -94,3 +94,25 @@ TEST_CASE( "Namespace collision ") {
 
     CHECK(lst2.size() == 0);
 }
+
+TEST_CASE( "deref operator ->" ) {
+    {
+        std::stringstream ss;
+        List_NS::List<std::string> lst{"hej","svej","dej"};
+        for ( auto it = lst.begin(); it != lst.end(); ++it )
+        {
+            ss << it->size() << ' ';
+        }
+        CHECK(ss.str() == "3 4 3 ");
+    }
+    {
+        std::stringstream ss;
+        struct Person{int age;};
+        List_NS::List<Person> lst{Person{10}, Person{15}};
+        for ( auto it = lst.begin(); it != lst.end(); ++it )
+        {
+            ss << it->age + 5 << ' ';
+        }
+        CHECK(ss.str() == "15 20 ");
+    }
+}
