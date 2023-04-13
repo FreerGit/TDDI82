@@ -112,6 +112,7 @@ void apply_single_by_arg(string const& arg, vector<string>& text) {
                 cout << setw(length) << left << i.first << " " << i.second << endl;
             }
         });
+        
     } else {
         throw invalid_argument(man_page());
     }
