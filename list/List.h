@@ -14,14 +14,14 @@ public:
     List();
     List(List<T> const &);
     List(List<T> &&) noexcept;
-    List(std::initializer_list<T>);
+    List(std::initializer_list<T> const&);
     ~List();
 
     List & operator=(List<T> const &)&;
     List & operator=(List<T> &&)& noexcept;
 
-    void push_front(T);
-    void push_back(T);
+    void push_front(T const&);
+    void push_back(T const&);
 
     T back() const noexcept;
     T & back() noexcept;
@@ -81,7 +81,7 @@ private:
 };
 
 template<typename T>
-std::ostream& operator<<(std::ostream &os, List<T> const &list);
+std::ostream& operator<<(std::ostream &os, List<T> const& list);
 
 }
 #include "List.tcc"

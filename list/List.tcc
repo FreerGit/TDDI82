@@ -46,7 +46,7 @@ List_NS::List<T>::List(List_NS::List<T> && tmp) noexcept
 }
 
 template<typename T>
-List_NS::List<T>::List(std::initializer_list<T> lst)
+List_NS::List<T>::List(std::initializer_list<T> const& lst)
     : List{}
 {
     for ( auto val : lst )
@@ -56,7 +56,7 @@ List_NS::List<T>::List(std::initializer_list<T> lst)
 }
 
 template<typename T>
-void List_NS::List<T>::push_front(T value)
+void List_NS::List<T>::push_front(T const& value)
 {
     Node * old_first { head->next.get() };
     head->next = std::make_unique<Node>(value, head.get(), std::move(head->next));
@@ -65,7 +65,7 @@ void List_NS::List<T>::push_front(T value)
 }
 
 template<typename T>
-void List_NS::List<T>::push_back(T value)
+void List_NS::List<T>::push_back(T const& value)
 {
     Node * old_last { this->tail->prev };
     old_last->next = std::make_unique<Node>(value, old_last, std::move(old_last->next));

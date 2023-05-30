@@ -4,6 +4,7 @@
 #include "catch.hpp"
 #include <sstream>
 #include <iterator>
+#include <string>
 
 TEST_CASE( "Create list" )
 {
@@ -28,6 +29,14 @@ TEST_CASE( "Create list" )
         lst.push_back(-100);
         CHECK(lst.at(0) == 100);
         CHECK(lst.at(8) == -100);
+    }
+    {
+        std::stringstream ss;
+        List_NS::List<std::string> lst{"hh", "jj", "aaa"};
+        lst.push_front("bb");
+        lst.push_back("cc");
+        ss << lst;
+        CHECK(ss.str() == "bb hh jj aaa cc");        
     }
     {
         List_NS::List<int> lst{1,2,3};
